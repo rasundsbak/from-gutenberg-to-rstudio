@@ -1,4 +1,3 @@
-setwd("/Users/path/to/your/files/")
 getwd()
 
 # install.packages("gutenbergr")
@@ -29,6 +28,9 @@ to_be_downloaded <- political_science_subjects$gutenberg_id
 
 Political_science_texts <- gutenberg_download(
   to_be_downloaded)
+
+# If the job takes too long, and you get doubts, you may use 
+# gutenberg_cache_clear_all()
 
 length(to_be_downloaded)
 

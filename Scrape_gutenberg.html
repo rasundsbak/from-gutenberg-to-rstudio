@@ -107,8 +107,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This project creates a curpus of books with the subject “Political science”</p>
 <p>When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. This is not absolutely necessary, but it gives peace of mind. In the following text, I will use the first person plural in order to include the readers in the proceses.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"/Users/path/to/your/files/"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd("/Users/path/to/your/project")</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd("/Users/path/to/your/project")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd may be used instead of an Rproj</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we have installed all of the packages that needed, it is advisable to comment out the code with a # like this:</p>
@@ -136,7 +136,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>to_be_downloaded <span class="ot">&lt;-</span> political_science_subjects<span class="sc">$</span>gutenberg_id</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>Political_science_texts <span class="ot">&lt;-</span> <span class="fu">gutenberg_download</span>(to_be_downloaded)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>Political_science_texts <span class="ot">&lt;-</span> <span class="fu">gutenberg_download</span>(to_be_downloaded)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If the job takes too long, and you get doubts, you may use </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># gutenberg_cache_clear_all()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We may check the length of the corpus with a command from R base</p>
 <div class="cell">
@@ -279,9 +282,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">Literature:</h2>
-<p>Bradford, Jordan (2026). Package “gutenbergr”. https://CRAN.R-project.org/package=gutenbergr</p>
-<p>GPT UiO (2026): UiOs privacy friendly GPT chat. Available url: https://chatgpt.com/</p>
-<p>Gutenberg, project (2026): https://gutenberg.org/</p>
+<p>Bradford, Jordan (2026). <a href="https://CRAN.R-project.org/package=gutenbergr">Package “gutenbergr”</a>.</p>
+<p>GPT UiO (2026): <a href="https://chatgpt.com/">UiOs privacy friendly GPT chat</a>. The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone.</p>
+<p>Gutenberg, project (2026): <a href="https://gutenberg.org/">Project Gutenberg</a>.</p>
 </section>
 </section>
 
