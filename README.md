@@ -1,1 +1,1 @@
-# from-gutenmerg-to-rstudio
+# from-gutenberg-to-rstudio
