@@ -17,7 +17,7 @@ When I write R-code, I always start with punching the absolute path, where I wan
 
 ```{r}
 #| label: my-awesome-chunk-name
-setwd("/Users/ragnhildsundsbak/Documents/Learning_R/Autumn2026/")
+setwd("/Users/path/to/your/project/")
 getwd()
 ```
 
@@ -29,8 +29,7 @@ When we have installed all of the packages that needed, it is advisable to comme
 #install.packages("usethis") 
 # etc.
 
-library(conflicted) 
-library(here) 
+library(conflicted)
 library(tidyverse)
 library(gutenbergr) 
 library(devtools) 
