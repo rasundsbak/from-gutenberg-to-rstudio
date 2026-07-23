@@ -9,11 +9,15 @@ execute:
 
 # Downloading a corpus from project gutenberg
 
-This repository shows how to download a corpus of selected literature from gutenberg.org (Gitenberg 2026) using the Cran package "gutenbergr" (Bradford 2026).
+This repository shows how to download a corpus of selected literature from gutenberg.org (Gutenberg 2026) using the Cran package "gutenbergr" (Bradford 2026).
 
-This project creates a curpus of books with the subject "Political science"
+## Purpose
 
-When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making a .Rproj, an R project and always klick on the .Rproj wile when you open the files. In that case, the getwd command will set your paths in the right place.
+This project creates a curpus of books with the subject "Political science".
+
+## Startup
+
+When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Things mught fail if you double klick files instead of the .Rproj.
 
 ```{r}
 #| label: setting-directory
@@ -23,7 +27,7 @@ When I write R-code, I always start with punching the absolute path, where I wan
 getwd()
 ```
 
-When we have installed all of the packages that needed, it is advisable to comment out the code with a \# like this:
+When we have installed all of the packages needed, it is advisable to comment out the code with a \# like this:
 
 ```{r}
 #| label: packages-libraries
@@ -60,7 +64,7 @@ View(political_science_subjects)
 class(political_science_subjects)
 ```
 
-Picking the relevant gutenberg_ids for the corpus, and checking out the vector.
+Selecting the relevant gutenberg_ids for the corpus, and checking out the vector.
 
 ```{r}
 to_be_downloaded <- political_science_subjects$gutenberg_id
@@ -129,7 +133,7 @@ head(subjects_p_sci_all)
 
 ## Putting it together
 
-This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate their involvement.
+This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate your involvement.
 
 ```{r}
 #| label: main-chunk

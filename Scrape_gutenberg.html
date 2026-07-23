@@ -103,15 +103,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="downloading-a-corpus-from-project-gutenberg" class="level1">
 <h1>Downloading a corpus from project gutenberg</h1>
-<p>This repository shows how to download a corpus of selected literature from gutenberg.org (Gitenberg 2026) using the Cran package “gutenbergr” (Bradford 2026).</p>
-<p>This project creates a curpus of books with the subject “Political science”</p>
-<p>When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making a .Rproj, an R project and always klick on the .Rproj wile when you open the files. In that case, the getwd command will set your paths in the right place.</p>
+<p>This repository shows how to download a corpus of selected literature from gutenberg.org (Gutenberg 2026) using the Cran package “gutenbergr” (Bradford 2026).</p>
+<section id="purpose" class="level2">
+<h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
+<p>This project creates a curpus of books with the subject “Political science”.</p>
+</section>
+<section id="startup" class="level2">
+<h2 class="anchored" data-anchor-id="startup">Startup</h2>
+<p>When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Things mught fail if you double klick files instead of the .Rproj.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd("/Users/path/to/your/project")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd may be used instead of an Rproj</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When we have installed all of the packages that needed, it is advisable to comment out the code with a # like this:</p>
+<p>When we have installed all of the packages needed, it is advisable to comment out the code with a # like this:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("gutenbergr")</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("devtools") </span></span>
@@ -139,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(political_science_subjects)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(political_science_subjects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Picking the relevant gutenberg_ids for the corpus, and checking out the vector.</p>
+<p>Selecting the relevant gutenberg_ids for the corpus, and checking out the vector.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>to_be_downloaded <span class="ot">&lt;-</span> political_science_subjects<span class="sc">$</span>gutenberg_id</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -157,6 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># If the job takes too long, and you get doubts, you may use </span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># gutenberg_cache_clear_all()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 <section id="how-many-books-gutenberg_ids-do-we-have" class="level2">
 <h2 class="anchored" data-anchor-id="how-many-books-gutenberg_ids-do-we-have">How many books/ gutenberg_ids do we have?</h2>
 <div class="cell">
@@ -202,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
-<p>This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate their involvement.</p>
+<p>This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate your involvement.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>write_gutenberg_md <span class="ot">&lt;-</span> <span class="cf">function</span>(book_id,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                               texts_df,</span>
