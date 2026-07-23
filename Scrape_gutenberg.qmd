@@ -13,11 +13,11 @@ This repository shows how to download a corpus of selected literature from guten
 
 ## Purpose
 
-This project creates a curpus of books with the subject "Political science".
+This project creates a corpus of books with the subject "Political science".
 
 ## Startup
 
-When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Things mught fail if you double klick files instead of the .Rproj.
+When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Be aware that hings might fail if you double klick files instead of the .Rproj.
 
 ```{r}
 #| label: setting-directory
@@ -48,7 +48,7 @@ conflicts_prefer(dplyr::filter())
 conflicts_prefer(dplyr::lag())
 ```
 
-The aim of the process is to prepare books as .md files for import into Obsidian vault.
+The aim of the process is to prepare books as .md files for import into Obsidian vault. Exciting things will happen in the vault at a later time, so please continue to follow me and my team :)
 
 ```{r}
 #| label: defining-the-corpus
@@ -64,7 +64,7 @@ View(political_science_subjects)
 class(political_science_subjects)
 ```
 
-Selecting the relevant gutenberg_ids for the corpus, and checking out the vector.
+Selecting the relevant gutenberg_ids for the corpus, and checking out the vector. You want to know its size, before you download.
 
 ```{r}
 to_be_downloaded <- political_science_subjects$gutenberg_id
@@ -105,7 +105,7 @@ Political_science_texts |>
 
 ## Including the metadata
 
-In gutenbergr, the metadata, and the supjects are split into different functions. Here, we start with the metadata.
+In "gutenbergr", the metadata, and the subjects are split into different functions. Here, we start with the metadata.
 
 ```{r}
 meta_p_sci <- gutenberg_metadata |>
@@ -133,7 +133,7 @@ head(subjects_p_sci_all)
 
 ## Putting it together
 
-This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate your involvement.
+This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim this chunk is uneducational. In that case, I appreciate your involvement.
 
 ```{r}
 #| label: main-chunk
@@ -202,7 +202,7 @@ write_gutenberg_md <- function(book_id,
 
 ## Final step
 
-This is the final step, and if everything works, the corpus will be downloaded to a folder called books_md
+This is the final step. If everything works, the corpus will be downloaded to a folder called books_md
 
 ```{r}
 purrr::walk(
@@ -217,12 +217,12 @@ purrr::walk(
 )
 ```
 
-This was all, and you are now ready to make your own corpus.
+This was all. You are now ready to make your own corpus.
 
 ## Literature:
 
 Bradford, Jordan (2026). [Package "gutenbergr"](https://CRAN.R-project.org/package=gutenbergr).
 
-GPT UiO (2026): [UiOs privacy friendly GPT chat](https://chatgpt.com/). The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone.
+GPT UiO (2026): UiOs privacy friendly [GPT chat](https://chatgpt.com/). The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone. [UiO main page](https://www.uio.no/).
 
 Gutenberg, project (2026): [Project Gutenberg](https://gutenberg.org/).

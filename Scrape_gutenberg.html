@@ -106,11 +106,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This repository shows how to download a corpus of selected literature from gutenberg.org (Gutenberg 2026) using the Cran package “gutenbergr” (Bradford 2026).</p>
 <section id="purpose" class="level2">
 <h2 class="anchored" data-anchor-id="purpose">Purpose</h2>
-<p>This project creates a curpus of books with the subject “Political science”.</p>
+<p>This project creates a corpus of books with the subject “Political science”.</p>
 </section>
 <section id="startup" class="level2">
 <h2 class="anchored" data-anchor-id="startup">Startup</h2>
-<p>When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Things mught fail if you double klick files instead of the .Rproj.</p>
+<p>When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making an .Rproj(ect), and always klick on the .Rproj file when you open the files. In that case, the getwd command will set your paths in the right place. Be aware that hings might fail if you double klick files instead of the .Rproj.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd("/Users/path/to/your/project")</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># setwd may be used instead of an Rproj</span></span>
@@ -134,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span><span class="fu">filter</span>()) </span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(dplyr<span class="sc">::</span><span class="fu">lag</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The aim of the process is to prepare books as .md files for import into Obsidian vault.</p>
+<p>The aim of the process is to prepare books as .md files for import into Obsidian vault. Exciting things will happen in the vault at a later time, so please continue to follow me and my team :)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>political_science_subjects <span class="ot">&lt;-</span> gutenberg_subjects <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(subject <span class="sc">==</span> <span class="st">"Political science"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -144,7 +144,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(political_science_subjects)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(political_science_subjects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Selecting the relevant gutenberg_ids for the corpus, and checking out the vector.</p>
+<p>Selecting the relevant gutenberg_ids for the corpus, and checking out the vector. You want to know its size, before you download.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>to_be_downloaded <span class="ot">&lt;-</span> political_science_subjects<span class="sc">$</span>gutenberg_id</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -182,7 +182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="including-the-metadata" class="level2">
 <h2 class="anchored" data-anchor-id="including-the-metadata">Including the metadata</h2>
-<p>In gutenbergr, the metadata, and the supjects are split into different functions. Here, we start with the metadata.</p>
+<p>In “gutenbergr”, the metadata, and the subjects are split into different functions. Here, we start with the metadata.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>meta_p_sci <span class="ot">&lt;-</span> gutenberg_metadata <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(gutenberg_id <span class="sc">%in%</span> to_be_downloaded)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="putting-it-together" class="level2">
 <h2 class="anchored" data-anchor-id="putting-it-together">Putting it together</h2>
-<p>This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate your involvement.</p>
+<p>This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim this chunk is uneducational. In that case, I appreciate your involvement.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>write_gutenberg_md <span class="ot">&lt;-</span> <span class="cf">function</span>(book_id,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                               texts_df,</span>
@@ -275,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="final-step" class="level2">
 <h2 class="anchored" data-anchor-id="final-step">Final step</h2>
-<p>This is the final step, and if everything works, the corpus will be downloaded to a folder called books_md</p>
+<p>This is the final step. If everything works, the corpus will be downloaded to a folder called books_md</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk</span>(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  to_be_downloaded,</span>
@@ -288,12 +288,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>This was all, and you are now ready to make your own corpus.</p>
+<p>This was all. You are now ready to make your own corpus.</p>
 </section>
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">Literature:</h2>
 <p>Bradford, Jordan (2026). <a href="https://CRAN.R-project.org/package=gutenbergr">Package “gutenbergr”</a>.</p>
-<p>GPT UiO (2026): <a href="https://chatgpt.com/">UiOs privacy friendly GPT chat</a>. The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone.</p>
+<p>GPT UiO (2026): UiOs privacy friendly <a href="https://chatgpt.com/">GPT chat</a>. The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone. <a href="https://www.uio.no/">UiO main page</a>.</p>
 <p>Gutenberg, project (2026): <a href="https://gutenberg.org/">Project Gutenberg</a>.</p>
 </section>
 </section>
