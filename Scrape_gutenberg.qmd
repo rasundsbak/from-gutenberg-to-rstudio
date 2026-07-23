@@ -9,11 +9,11 @@ execute:
 
 # Downloading a corpus from project gutenberg
 
-In this repository shows how I downloaded a corpus of selected literature from gutenberg.org (Gitenberg 2026) using the Cran package "gutenbergr" (Bradford 2026).
+This repository shows how to download a corpus of selected literature from gutenberg.org (Gitenberg 2026) using the Cran package "gutenbergr" (Bradford 2026).
 
 This project creates a curpus of books with the subject "Political science"
 
-When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. This is not absolutely necessary, but it gives peace of mind. In the following text, I will use the first person plural in order to include the readers in the proceses.
+When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making a .Rproj, an R project and always klick on the .Rproj wile when you open the files. In that case, the getwd command will set your paths in the right place.
 
 ```{r}
 #| label: setting-directory
@@ -47,29 +47,38 @@ conflicts_prefer(dplyr::lag())
 The aim of the process is to prepare books as .md files for import into Obsidian vault.
 
 ```{r}
+#| label: defining-the-corpus
+
 political_science_subjects <- gutenberg_subjects |>
   filter(subject == "Political science")
-
-to_be_downloaded <- political_science_subjects$gutenberg_id
 ```
 
-Looking at the size of the vector with the name "to_be_downloaded"
+Checking the results.
 
 ```{r}
+View(political_science_subjects)
+class(political_science_subjects)
+```
+
+Picking the relevant gutenberg_ids for the corpus, and checking out the vector.
+
+```{r}
+to_be_downloaded <- political_science_subjects$gutenberg_id
+
+# Checking out the vector to_be_downloaded
 View(to_be_downloaded)
 class(to_be_downloaded)
 length(to_be_downloaded)
 ```
 
-## The download
+The download might take some time, depending on how many books you have.
 
 ```{r}
-Political_science_texts <- gutenberg_download(to_be_downloaded)
-```
+# The download
+Political_science_texts <- gutenberg_download(
+  to_be_downloaded)
 
-If the job takes too long, and you get doubts, you may use the command below
-
-```{r}
+# If the job takes too long, and you get doubts, you may use 
 # gutenberg_cache_clear_all()
 ```
 
@@ -92,18 +101,21 @@ Political_science_texts |>
 
 ## Including the metadata
 
-We need metadata, in order to do a good job. In "gutenbergr", the metadata and the subject are split into two different categories. This is why we have to handle them separately.
+In gutenbergr, the metadata, and the supjects are split into different functions. Here, we start with the metadata.
 
 ```{r}
 meta_p_sci <- gutenberg_metadata |>
   filter(gutenberg_id %in% to_be_downloaded)
+```
 
-# looking at the result, to confirm
-glimpse(meta_p_sci)
+## What does the metadata look like?
+
+```{r}
+glimpse(meta_p_sci) 
 head(meta_p_sci)
 ```
 
-## The subjects
+## Subjects
 
 We want all subjects for these books.
 
@@ -113,10 +125,9 @@ subjects_p_sci_all <- gutenberg_subjects |>
 
 glimpse(subjects_p_sci_all)
 head(subjects_p_sci_all)
-
 ```
 
-## Putting everything together
+## Putting it together
 
 This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate their involvement.
 
@@ -200,10 +211,9 @@ purrr::walk(
     out_dir     = "books_md"
   )
 )
-
 ```
 
-This was all. You are now ready to make your own corpus.
+This was all, and you are now ready to make your own corpus.
 
 ## Literature:
 

@@ -1,0 +1,30 @@
+---
+title: "Explore"
+format: html
+editor: visual
+execute:
+  eval: false
+---
+
+# Commands to be explored
+
+## gutenberg_add_sections
+
+The function identifies section markers in the text (Bradford 2026).
+
+```{r}
+P_sci_text_w_patterns <- Political_science_texts |>
+  gutenberg_add_sections(
+    pattern = "^(Letter|Chapter) [0-9]+",   # Multiple formats fra "details"
+    format_fn = stringr::str_to_title,
+    group_by = "auto",
+    section_col = "section"
+  )
+```
+
+# Get overview over what you have done
+
+```{r}
+dim(P_sci_text_w_patterns)
+head(P_sci_text_w_patterns)
+```
