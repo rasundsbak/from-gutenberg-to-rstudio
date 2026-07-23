@@ -59,6 +59,7 @@ Checking the results.
 View(political_science_subjects)
 class(political_science_subjects)
 ```
+
 Picking the relevant gitenberg_ids for the corpus, and checking out the vector.
 
 ```{r}
@@ -99,6 +100,7 @@ Political_science_texts |>
 ```
 
 ## Including the metadata
+
 In gutenbergr, the metadata, and the supjects are split into different functions. Here, we start with the metadata.
 
 ```{r}
@@ -114,6 +116,7 @@ head(meta_p_sci)
 ```
 
 # We want all subjects for these books.
+
 ```{r}
 subjects_p_sci_all <- gutenberg_subjects |>
   filter(gutenberg_id %in% to_be_downloaded)
@@ -123,6 +126,7 @@ head(subjects_p_sci_all)
 ```
 
 ## Putting it together
+
 This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate their involvement.
 
 ```{r}
@@ -191,6 +195,7 @@ write_gutenberg_md <- function(book_id,
 ```
 
 ## Final step
+
 This is the final step, and if everything works, the corpus will be downloaded to a folder called books_md
 
 ```{r}
