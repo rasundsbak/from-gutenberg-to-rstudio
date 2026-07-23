@@ -1,0 +1,217 @@
+---
+title: "Scrape_gutenberg"
+author: "Ragnhild Sundsbak"
+format: html
+editor: visual
+execute:
+  eval: false
+---
+
+# Downloading a corpus from project gutenberg
+
+This repository shows how to download a corpus of selected literature from gutenberg.org (Gitenberg 2026) using the Cran package "gutenbergr" (Bradford 2026).
+
+This project creates a curpus of books with the subject "Political science"
+
+When I write R-code, I always start with punching the absolute path, where I want my documents to be located. Then I ask R to confirm with getwd. The same result may be achieved through making a .Rproj, an R project and always klick on the .Rproj wile when you open the files. In that case, the getwd command will set your paths in the right place.
+
+```{r}
+#| label: setting-directory
+
+# setwd("/Users/path/to/your/project")
+# setwd may be used instead of an Rproj
+getwd()
+```
+
+When we have installed all of the packages that needed, it is advisable to comment out the code with a \# like this:
+
+```{r}
+#| label: packages-libraries
+# install.packages("gutenbergr")
+#install.packages("devtools") 
+#install.packages("usethis") 
+# etc.
+
+library(conflicted)
+library(tidyverse)
+library(gutenbergr) 
+library(devtools) 
+library(usethis)
+
+conflict_scout()
+
+conflicts_prefer(dplyr::filter()) 
+conflicts_prefer(dplyr::lag())
+```
+
+The aim of the process is to prepare books as .md files for import into Obsidian vault.
+
+```{r}
+#| label: defining-the-corpus
+
+political_science_subjects <- gutenberg_subjects |>
+  filter(subject == "Political science")
+```
+
+Checking the results.
+
+```{r}
+View(political_science_subjects)
+class(political_science_subjects)
+```
+Picking the relevant gitenberg_ids for the corpus, and checking out the vector.
+
+```{r}
+to_be_downloaded <- political_science_subjects$gutenberg_id
+
+# Checking out the vector to_be_downloaded
+View(to_be_downloaded)
+class(to_be_downloaded)
+length(to_be_downloaded)
+```
+
+The download might take some time, depending on how many books you have.
+
+```{r}
+# The download
+Political_science_texts <- gutenberg_download(
+  to_be_downloaded)
+
+# If the job takes too long, and you get doubts, you may use 
+# gutenberg_cache_clear_all()
+```
+
+## How many books/ gutenberg_ids do we have?
+
+```{r}
+Political_science_texts |> 
+  summarise(
+    number_of_rows = n(),
+    number_of_books = n_distinct(gutenberg_id)
+  )
+```
+
+## Lines pr book
+
+```{r}
+Political_science_texts |>
+  count(gutenberg_id, name = "number_of_lines")
+```
+
+## Including the metadata
+In gutenbergr, the metadata, and the supjects are split into different functions. Here, we start with the metadata.
+
+```{r}
+meta_p_sci <- gutenberg_metadata |>
+  filter(gutenberg_id %in% to_be_downloaded)
+```
+
+## What does the metadata look like?
+
+```{r}
+glimpse(meta_p_sci) 
+head(meta_p_sci)
+```
+
+# We want all subjects for these books.
+```{r}
+subjects_p_sci_all <- gutenberg_subjects |>
+  filter(gutenberg_id %in% to_be_downloaded)
+
+glimpse(subjects_p_sci_all)
+head(subjects_p_sci_all)
+```
+
+## Putting it together
+This is supposed to solve the process. I had some help from ChatGPT (GPT UiO 2026). I plan to split this process up later, in order to facilitate understanding. But since it works, it will be kept here until I have a replacement. Readers may claim it is uneducational. In that case, I will appreciate their involvement.
+
+```{r}
+#| label: main-chunk
+write_gutenberg_md <- function(book_id,
+                               texts_df,
+                               meta_df,
+                               subjects_df,
+                               out_dir = "books_md") {
+  # Text lines for the book
+  txt <- texts_df |>
+    filter(gutenberg_id == book_id)
+  
+  if (nrow(txt) == 0) {
+    warning("Ingen tekstlinjer for book_id = ", book_id)
+    return(invisible(NULL))
+  }
+  
+  # Metadata for the book
+  meta <- meta_df |>
+    filter(gutenberg_id == book_id)
+  
+  # All of the subjects for the book
+  subs <- subjects_df |>
+    filter(gutenberg_id == book_id)
+  
+  # Choose elements from metadata
+  title    <- meta$title[1]
+  author   <- meta$author[1]
+  language <- meta$language[1] %||% "unknown"
+  rights   <- meta$rights[1]    %||% ""
+  
+  subjects_str <- subs |>
+    pull(subject) |>
+    paste(collapse = "; ")
+  
+  # Merging the text lines
+  full_text <- txt |>
+    pull(text) |>
+    paste(collapse = "\n")
+  
+  # Metadata-header
+  header_lines <- c(
+    paste0("# Title: ", title),
+    paste0("# Author: ", author),
+    paste0("# Gutenberg ID: ", book_id),
+    paste0("# Language: ", language),
+    paste0("# Rights: ", rights),
+    paste0("# Subjects: ", subjects_str),
+    "",
+    "--- START OF TEXT ---",
+    ""
+  )
+  
+  md_lines <- c(header_lines, full_text)
+  
+  # Filename and folder
+  if (!dir.exists(out_dir)) dir.create(out_dir, recursive = TRUE)
+  
+  safe_title <- stringr::str_replace_all(title, "[^[:alnum:]]+", "_")
+  file_name  <- file.path(out_dir, paste0(book_id, "_", safe_title, ".md"))
+  
+  writeLines(md_lines, con = file_name, useBytes = TRUE)
+  message("Wrote ", file_name)
+}
+```
+
+## Final step
+This is the final step, and if everything works, the corpus will be downloaded to a folder called books_md
+
+```{r}
+purrr::walk(
+  to_be_downloaded,
+  ~ write_gutenberg_md(
+    book_id     = .x,
+    texts_df    = Political_science_texts,
+    meta_df     = meta_p_sci,
+    subjects_df = subjects_p_sci_all,  # alle subjects for disse bøkene
+    out_dir     = "books_md"
+  )
+)
+```
+
+This was all, and you are now ready to make your own corpus.
+
+## Literature:
+
+Bradford, Jordan (2026). [Package "gutenbergr"](https://CRAN.R-project.org/package=gutenbergr).
+
+GPT UiO (2026): [UiOs privacy friendly GPT chat](https://chatgpt.com/). The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone.
+
+Gutenberg, project (2026): [Project Gutenberg](https://gutenberg.org/).
