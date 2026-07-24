@@ -226,3 +226,7 @@ Bradford, Jordan (2026). [Package "gutenbergr"](https://CRAN.R-project.org/packa
 GPT UiO (2026): UiOs privacy friendly [GPT chat](https://chatgpt.com/). The privacy friendly chat is for internal users. I have added the url for a similar service that is open to everyone. [UiO main page](https://www.uio.no/).
 
 Gutenberg, project (2026): [Project Gutenberg](https://gutenberg.org/).
+
+## Illustrations
+
+Photo by [Haydn](https://unsplash.com/@hgpound?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/photos/a-herd-of-wildebeest-crossing-a-wide-river-in-africa-PwN9a_CqVIU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).
